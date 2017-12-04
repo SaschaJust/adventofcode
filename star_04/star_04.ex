@@ -23,3 +23,4 @@ input \
   ) end)
 |> Enum.count
 |> IO.puts
+# result 265
