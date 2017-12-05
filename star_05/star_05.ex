@@ -23,4 +23,6 @@ defmodule Star05 do
 end
 
 map |> Star05.jump1(0, 0) |> IO.puts
+# result: 374269
 map |> Star05.jump2(0, 0) |> IO.puts
+# result: 27720699
