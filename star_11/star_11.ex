@@ -26,7 +26,7 @@ defmodule Star11 do
   end
 
   def step([], {x, y, z}, max_distance) do
-    {{x, y, z} |> distance, max_distance}
+    {{x, y, z} |> distance, max(max_distance, {x, y, z} |> distance)}
   end
 
   def distance({x, y, z}) do
