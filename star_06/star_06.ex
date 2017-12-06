@@ -1,9 +1,10 @@
-{_, input} = File.read("star_06.input")
-map = input \
-  |> String.trim \
-  |> String.split("\t") \
-  |> Enum.with_index \
-  |> Enum.map(fn {x, y} -> {y,String.to_integer x} end) \
+{:ok, input} = File.read("star_06.input")
+
+map = input
+  |> String.trim
+  |> String.split("\t")
+  |> Enum.with_index
+  |> Enum.map(fn {x, y} -> {y,String.to_integer x} end)
   |> Map.new
 
 defmodule Star06 do
@@ -19,9 +20,9 @@ defmodule Star06 do
       cond do
         MapSet.member?(states, blocks) -> counter
         true -> balance1(
-          blocks \
-          |> Map.to_list \
-          |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end) \
+          blocks
+          |> Map.to_list
+          |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end)
           |> distribute(blocks, true),
         MapSet.put(states, blocks),
         counter+1)
@@ -32,32 +33,31 @@ defmodule Star06 do
       cond do
         MapSet.member?(states, blocks) -> cond do
           ref == nil -> balance2(
-            blocks \
-              |> Map.to_list \
-              |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end) \
+            blocks
+              |> Map.to_list
+              |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end)
               |> distribute(blocks, true),
             MapSet.put(states, blocks),
             blocks,
             counter + 1)
           ref == blocks -> counter
           true -> balance2(
-            blocks \
-              |> Map.to_list \
-              |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end) \
+            blocks
+              |> Map.to_list
+              |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end)
               |> distribute(blocks, true),
           MapSet.put(states, blocks),
           ref,
           counter+1)
-
         end
         true -> balance2(
-          blocks \
-            |> Map.to_list \
-            |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end) \
+          blocks
+            |> Map.to_list
+            |> Enum.reduce(fn ({x, y}, {key, max}) -> if y > max, do: {x, y}, else: {key, max} end)
             |> distribute(blocks, true),
-        MapSet.put(states, blocks),
-        ref,
-        counter)
+          MapSet.put(states, blocks),
+          ref,
+          counter)
       end
   end
 end

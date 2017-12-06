@@ -31,7 +31,9 @@ defmodule Star03 do
             [ {a, b} | remainder ] -> f.(f, grid, {x, y}, remainder, sum + Map.get(grid, {a, b}, 0))
             _ -> raise "Invalid input"
           end
-        end; grid=compute.(compute, grid, {x, y}, for i <- x-1..x+1, j <- y-1..y+1 do {i, j} end, 0); part2(block,
+        end;
+        grid=compute.(compute, grid, {x, y}, for i <- x-1..x+1, j <- y-1..y+1 do {i, j} end, 0); 
+        part2(block,
         case direction do
           0 -> {x+1, y}
           1 -> {x, y+1}
@@ -49,10 +51,10 @@ defmodule Star03 do
   end
 end
 
-Star03.part1(0, {0, 0}, 1, 0, 1, input) \
+Star03.part1(0, {0, 0}, 1, 0, 1, input)
 |> IO.puts
 # result: 371
 
-Star03.part2(0, {0, 0}, 1, 0, Map.new([{{0,0}, 1}]), 0, input) \
+Star03.part2(0, {0, 0}, 1, 0, Map.new([{{0,0}, 1}]), 0, input)
 |> IO.puts
 # result: 369601

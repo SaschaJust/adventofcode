@@ -1,9 +1,9 @@
-{_, input} = File.read("star_08.input")
+{:ok, input} = File.read("star_08.input")
 
-map_list = input \
-  |> String.trim \
-  |> String.split("\n") \
-  |> Enum.map(fn x -> ~r/(?<name>\S+) (?<instruction>inc|dec) (?<delta>-?\d+) if (?<lhs>\w+) (?<op>>|<|>=|<=|!=|==) (?<rhs>-?\d+)/ \
+map_list = input
+  |> String.trim
+  |> String.split("\n")
+  |> Enum.map(fn x -> ~r/(?<name>\S+) (?<instruction>inc|dec) (?<delta>-?\d+) if (?<lhs>\w+) (?<op>>|<|>=|<=|!=|==) (?<rhs>-?\d+)/
     |> Regex.named_captures(x) end)
 
 defmodule Star08 do

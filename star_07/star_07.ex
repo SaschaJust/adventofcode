@@ -1,9 +1,9 @@
-{_, input} = File.read("star_07.input")
+{:ok, input} = File.read("star_07.input")
 
-map_list = input \
-  |> String.trim \
-  |> String.split("\n") \
-  |> Enum.map(fn x -> ~r/(?<name>\S+) \((?<weight>\d+)\)( -> (?<children>.*))?/ \
+map_list = input
+  |> String.trim
+  |> String.split("\n")
+  |> Enum.map(fn x -> ~r/(?<name>\S+) \((?<weight>\d+)\)( -> (?<children>.*))?/
     |> Regex.named_captures(x) end)
 
 defmodule Star07 do
@@ -43,13 +43,15 @@ defmodule Star07 do
 
   def find_imbalance(root, tree, imbalance) do
     {weight, list} = Map.get(tree, root)
-    subgroups = list |> Enum.map(fn x -> {x, Star07.compute_weight(x, tree)} end) \
-      |> Enum.group_by(fn {_, weight} -> weight end) \
+
+    subgroups = list |> Enum.map(fn x -> {x, Star07.compute_weight(x, tree)} end)
+      |> Enum.group_by(fn {_, weight} -> weight end)
       |> Map.to_list
-    case subgroups |> Enum.filter(fn {_, y} -> y |> Enum.count == 1 end)  do
-      [] -> weight + imbalance
-      [{_, [{name, off1} | _]}] -> [{_, [{_, off2} | _]}] = subgroups \
-        |> Enum.filter(fn {_, y} -> y |> Enum.count != 1 end); find_imbalance(name, tree, off2 - off1)
+
+    case subgroups |> Enum.find(fn {_, y} -> y |> Enum.count == 1 end)  do
+      nil -> weight + imbalance
+      {_, [{name, off1} | _]} -> {_, [{_, off2} | _]} = subgroups
+        |> Enum.find(fn {_, y} -> y |> Enum.count != 1 end); find_imbalance(name, tree, off2 - off1)
     end
   end
 end

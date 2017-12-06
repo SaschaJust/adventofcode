@@ -1,9 +1,10 @@
-{_, input} = File.read("star_05.input")
-map = input \
-  |> String.trim \
-  |> String.split("\n") \
-  |> Enum.with_index \
-  |> Enum.map(fn {x, y} -> {y,String.to_integer x} end) \
+{:ok, input} = File.read("star_05.input")
+
+map = input
+  |> String.trim
+  |> String.split("\n")
+  |> Enum.with_index
+  |> Enum.map(fn {x, y} -> {y,String.to_integer x} end)
   |> Map.new
 
 defmodule Star05 do

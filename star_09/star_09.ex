@@ -1,4 +1,4 @@
-{_, input} = File.read("star_09.input")
+{:ok, input} = File.read("star_09.input")
 
 string = input \
   |> String.trim

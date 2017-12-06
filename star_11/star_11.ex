@@ -1,4 +1,4 @@
-{_, input} = File.read("star_11.input")
+{:ok, input} = File.read("star_11.input")
 
 defmodule Star11 do
   def step([ "ne" | remainder ], {x, y, z}, max_distance) do

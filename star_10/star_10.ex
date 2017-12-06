@@ -1,5 +1,5 @@
 use Bitwise
-{_, input} = File.read("star_10.input")
+{:ok, input} = File.read("star_10.input")
 
 defmodule Star10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do
@@ -33,7 +33,7 @@ end
 input
   |> String.trim
   |> String.split(",")
-  |> Enum.map(&(String.to_integer/1))
+  |> Enum.map(&String.to_integer/1)
   |> Star10.pinch(Enum.to_list(0..255), 0, 0)
   |> Enum.take(2)
   |> Enum.reduce(1, &*/2)
