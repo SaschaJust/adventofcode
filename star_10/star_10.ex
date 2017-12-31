@@ -28,6 +28,15 @@ defmodule Star10 do
   def pinch([], list, _, _) do
     list
   end
+
+  def knot_hash(input) do
+    Enum.to_list(1..64)
+      |> Enum.reduce([], fn(_, acc) -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
+      |> Star10.pinch(Enum.to_list(0..255), 0, 0)
+      |> Enum.chunk_every(16)
+      |> Enum.map(fn x -> x |> Enum.reduce(0, &^^^/2) end)
+      |> Enum.reduce("", fn(x, acc) -> acc <> Base.encode16(<<x>>) end)
+  end
 end
 
 input
@@ -40,11 +49,5 @@ input
   |> IO.puts
 # result: 4114
 
-Enum.to_list(1..64)
-  |> Enum.reduce([], fn(_, acc) -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
-  |> Star10.pinch(Enum.to_list(0..255), 0, 0)
-  |> Enum.chunk_every(16)
-  |> Enum.map(fn x -> x |> Enum.reduce(0, &^^^/2) end)
-  |> Enum.reduce("", fn(x, acc) -> acc <> Base.encode16(<<x>>) end)
-  |> IO.puts
+input |> Star10.knot_hash |> IO.puts
 # result: 2F8C3D2100FDD57CEC130D928B0FD2DD
