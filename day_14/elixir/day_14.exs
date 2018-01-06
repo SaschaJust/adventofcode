@@ -1,5 +1,5 @@
 use Bitwise
-{:ok, input} = File.read("star_14.input")
+{:ok, input} = File.read("../day_14.input")
 
 defmodule Day10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do

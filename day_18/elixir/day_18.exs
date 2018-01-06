@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_18.input")
+{:ok, input} = File.read("../day_18.input")
 
 defmodule Day18 do
   def value(registers, token) do

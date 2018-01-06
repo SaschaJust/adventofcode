@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_06.input")
+{:ok, input} = File.read("../day_06.input")
 
 map = input
   |> String.trim

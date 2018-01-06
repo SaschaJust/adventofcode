@@ -1,4 +1,4 @@
-{:ok, input} = File.read "star_19.input"
+{:ok, input} = File.read "../day_19.input"
 
 defmodule Day19 do
   def get(matrix, {x, y}) do

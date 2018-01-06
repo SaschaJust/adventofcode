@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_20.input")
+{:ok, input} = File.read("../day_20.input")
 
 defmodule Day20 do
   @give_up 100
@@ -17,7 +17,6 @@ defmodule Day20 do
                     |> Map.values
                     |> Enum.filter(fn x -> x |> Enum.count == 1 end)
                     |> List.flatten, index+1)
-    end
   end
 end
 

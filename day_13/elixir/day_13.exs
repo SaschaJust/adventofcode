@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_13.input")
+{:ok, input} = File.read("../day_13.input")
 
 defmodule Day13 do
   def severity([{level, depth} | tail], offset) do

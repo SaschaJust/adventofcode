@@ -1,4 +1,6 @@
-{:ok, input} = File.read("star_01.input")
+IO.puts "Day 01: Inverse Captcha"
+
+{:ok, input} = File.read("../day_01.input")
 
 # convert to int list
 list = input
@@ -13,6 +15,7 @@ list = input
 list ++ [Enum.at(list, 0)]
   |> Enum.reduce({0, 0}, fn(x, {acc, last}) -> if x == last do {acc+x, x} else {acc, x} end end)
   |> elem(0)
+  |> (&"The solution to the capture is #{&1}.").()
   |> IO.puts
 # result: 1034
 
@@ -23,6 +26,7 @@ Enum.chunk_every(list, div(length(list),2))
 	|> Enum.concat
 	|> Enum.zip(list)
 	|> Enum.reduce(0, fn({x, y}, acc) -> if x == y do acc+x else acc end end)
+  |> (&"The solution to the new capture is #{&1}.").()
 	|> IO.puts
 # result: 1356
 
@@ -38,6 +42,7 @@ input
 	|> Enum.zip(list)
 	|> Enum.filter(fn({x, y}) -> x == y end)
 	|> Enum.reduce(0 , fn({x, _}, acc) -> acc+x end)
+  |> (&"The solution to the capture is #{&1}.").()
 	|> IO.puts
 # result: 1034
 
@@ -53,5 +58,6 @@ input
 	|> Enum.zip(list)
 	|> Enum.filter(fn({x, y}) -> x == y end)
 	|> Enum.reduce(0 , fn({x, _}, acc) -> acc+x end)
+  |> (&"The solution to the new capture is #{&1}.").()
 	|> IO.puts
 # result: 1356

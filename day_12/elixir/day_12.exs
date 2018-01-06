@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_12.input")
+{:ok, input} = File.read("../day_12.input")
 
 defmodule Day12 do
   def connected(map, set, key) do
@@ -28,4 +28,4 @@ group |> MapSet.size |> IO.inspect
 
 group
   |> MapSet.to_list
-  |> Enum.reduce(map, fn (x, acc) -> acc |> Map.pop(x))
+  |> Enum.reduce(map, fn (x, acc) -> acc |> Map.pop(x) end)

@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_11.input")
+{:ok, input} = File.read("../day_11.input")
 
 defmodule Day11 do
   def step([ "ne" | remainder ], {x, y, z}, max_distance) do

@@ -1,4 +1,4 @@
-{:ok, input} = File.read("star_16.input")
+{:ok, input} = File.read("../day_16.input")
 
 defmodule Day16 do
   def swap(state, first, second) do
