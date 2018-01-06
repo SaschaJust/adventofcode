@@ -6,7 +6,7 @@ map_list = input
   |> Enum.map(fn x -> ~r/(?<name>\S+) (?<instruction>inc|dec) (?<delta>-?\d+) if (?<lhs>\w+) (?<op>>|<|>=|<=|!=|==) (?<rhs>-?\d+)/
     |> Regex.named_captures(x) end)
 
-defmodule Star08 do
+defmodule Day08 do
   def fun(operator) do
     case operator do
       "<=" -> &<=/2
@@ -21,11 +21,11 @@ defmodule Star08 do
   end
 
   def process([ %{"name" => name, "instruction" => instruction, "delta" => delta, "lhs" => lhs, "op" => op, "rhs" => rhs} | remainder ], registers, max) do
-    if Star08.fun(op).(
+    if Day08.fun(op).(
       Map.get(registers, lhs, 0),
       String.to_integer(rhs)
     ) do
-      new_value = Star08.fun(instruction).(
+      new_value = Day08.fun(instruction).(
         Map.get(registers, name, 0),
         String.to_integer(delta)
       );
@@ -40,4 +40,4 @@ defmodule Star08 do
   end
 end
 
-map_list |> Star08.process(Map.new(), 0) |> IO.inspect
+map_list |> Day08.process(Map.new(), 0) |> IO.inspect

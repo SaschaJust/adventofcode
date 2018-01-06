@@ -1,6 +1,6 @@
 {:ok, input} = File.read "star_19.input"
 
-defmodule Star19 do
+defmodule Day19 do
   def get(matrix, {x, y}) do
     matrix |> Map.get(y) |> Map.get(x, " ")
   end
@@ -32,6 +32,6 @@ start = matrix
   |> elem(0)
 
 matrix
-  |> Star19.step({0, 1}, {start, 0}, "", 0)
+  |> Day19.step({0, 1}, {start, 0}, "", 0)
   |> (&"Took #{&1 |> elem(1)} steps and found trace #{&1 |> elem(0)}.").()
   |> IO.puts

@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_13.input")
 
-defmodule Star13 do
+defmodule Day13 do
   def severity([{level, depth} | tail], offset) do
     position = case rem(level + offset, 2*(depth-1)) do
       x when x in 0..depth-1 -> rem(x, depth)
@@ -46,5 +46,5 @@ list = input
     |> Enum.map(&String.to_integer/1)
     |> List.to_tuple end)
 
-list |> Star13.severity(0) |> IO.puts
-list |> Star13.find_offset(0) |> IO.puts
+list |> Day13.severity(0) |> IO.puts
+list |> Day13.find_offset(0) |> IO.puts

@@ -1,7 +1,7 @@
 use Bitwise
 {:ok, input} = File.read("star_10.input")
 
-defmodule Star10 do
+defmodule Day10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do
       {new_rhs, new_lhs} = rev_rhs ++ rev_lhs |> Enum.reverse |> Enum.split(Enum.count(rev_rhs))
       new_lhs ++ const_lhs ++ new_rhs ++ const_rhs
@@ -32,7 +32,7 @@ defmodule Star10 do
   def knot_hash(input) do
     Enum.to_list(1..64)
       |> Enum.reduce([], fn(_, acc) -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
-      |> Star10.pinch(Enum.to_list(0..255), 0, 0)
+      |> Day10.pinch(Enum.to_list(0..255), 0, 0)
       |> Enum.chunk_every(16)
       |> Enum.map(fn x -> x |> Enum.reduce(0, &^^^/2) end)
       |> Enum.reduce("", fn(x, acc) -> acc <> Base.encode16(<<x>>) end)
@@ -43,11 +43,11 @@ input
   |> String.trim
   |> String.split(",")
   |> Enum.map(&String.to_integer/1)
-  |> Star10.pinch(Enum.to_list(0..255), 0, 0)
+  |> Day10.pinch(Enum.to_list(0..255), 0, 0)
   |> Enum.take(2)
   |> Enum.reduce(1, &*/2)
   |> IO.puts
 # result: 4114
 
-input |> Star10.knot_hash |> IO.puts
+input |> Day10.knot_hash |> IO.puts
 # result: 2F8C3D2100FDD57CEC130D928B0FD2DD

@@ -3,7 +3,7 @@
 string = input \
   |> String.trim
 
-defmodule Star09 do
+defmodule Day09 do
   def parse("{" <> remainder, group_level, false, garbage_count) do
     parse(remainder, group_level+1, false, garbage_count)
   end
@@ -38,4 +38,4 @@ defmodule Star09 do
   end
 end
 
-string |> Star09.parse(0, false, 0) |> IO.puts
+string |> Day09.parse(0, false, 0) |> IO.puts

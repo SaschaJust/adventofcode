@@ -7,7 +7,7 @@ map = input
   |> Enum.map(fn {x, y} -> {y,String.to_integer x} end)
   |> Map.new
 
-defmodule Star06 do
+defmodule Day06 do
   def distribute({key, value}, blocks,  init? \\ false) do
     cond do
       init? -> distribute({rem(key+1, Map.size(blocks)), value}, Map.put(blocks, key, 0))
@@ -62,5 +62,5 @@ defmodule Star06 do
   end
 end
 
-map |> Star06.balance1(MapSet.new(), 0) |> IO.puts
-map |> Star06.balance2(MapSet.new(), nil, 0) |> IO.puts
+map |> Day06.balance1(MapSet.new(), 0) |> IO.puts
+map |> Day06.balance2(MapSet.new(), nil, 0) |> IO.puts

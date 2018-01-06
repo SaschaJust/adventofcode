@@ -7,7 +7,7 @@ map = input
   |> Enum.map(fn {x, y} -> {y,String.to_integer x} end)
   |> Map.new
 
-defmodule Star05 do
+defmodule Day05 do
   def jump1(map, index, step) do
     cond do
       map_size(map) <= index -> step
@@ -23,7 +23,7 @@ defmodule Star05 do
   end
 end
 
-map |> Star05.jump1(0, 0) |> IO.puts
+map |> Day05.jump1(0, 0) |> IO.puts
 # result: 374269
-map |> Star05.jump2(0, 0) |> IO.puts
+map |> Day05.jump2(0, 0) |> IO.puts
 # result: 27720699

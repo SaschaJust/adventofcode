@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_12.input")
 
-defmodule Star12 do
+defmodule Day12 do
   def connected(map, set, key) do
     if set |> MapSet.member?(key) do
       set
@@ -23,7 +23,7 @@ input
   |> Enum.map(fn x -> String.split(x, " <-> ") end)
   |> Enum.reduce(Map.new, fn ([x,y], acc) -> acc |> Map.put(x |> String.to_integer, y |> String.split(", ") |> Enum.map(&String.to_integer/1)) end)
 
-group = map |> Star12.connected(MapSet.new, 0)
+group = map |> Day12.connected(MapSet.new, 0)
 group |> MapSet.size |> IO.inspect
 
 group

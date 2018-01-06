@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_18.input")
 
-defmodule Star18 do
+defmodule Day18 do
   def value(registers, token) do
     case Integer.parse(token) do
       :error -> registers |> Map.get(token)
@@ -79,13 +79,13 @@ program = input
   |> Map.new
 
 IO.puts "Part 1:"
-task0 = Task.async fn->Star18.execute(program, 0) end
+task0 = Task.async fn->Day18.execute(program, 0) end
 send Map.fetch!(task0, :pid), {:task, task0}
 Task.await(task0)
 
 IO.puts "Part 2:"
-task0 = Task.async fn->Star18.execute(program, 0) end
-task1 = Task.async fn->Star18.execute(program, 1) end
+task0 = Task.async fn->Day18.execute(program, 0) end
+task1 = Task.async fn->Day18.execute(program, 1) end
 
 send Map.fetch!(task0, :pid), {:task, task1}
 send Map.fetch!(task1, :pid), {:task, task0}

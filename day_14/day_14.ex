@@ -1,7 +1,7 @@
 use Bitwise
 {:ok, input} = File.read("star_14.input")
 
-defmodule Star10 do
+defmodule Day10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do
       {new_rhs, new_lhs} = rev_rhs ++ rev_lhs |> Enum.reverse |> Enum.split(Enum.count(rev_rhs))
       new_lhs ++ const_lhs ++ new_rhs ++ const_rhs
@@ -32,14 +32,14 @@ defmodule Star10 do
   def knot_hash(input) do
     Enum.to_list(1..64)
       |> Enum.reduce([], fn(_, acc) -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
-      |> Star10.pinch(Enum.to_list(0..255), 0, 0)
+      |> Day10.pinch(Enum.to_list(0..255), 0, 0)
       |> Enum.chunk_every(16)
       |> Enum.map(fn x -> x |> Enum.reduce(0, &^^^/2) end)
       |> Enum.reduce("", fn(x, acc) -> acc <> Base.encode16(<<x>>) end)
   end
 end
 
-defmodule Star14 do
+defmodule Day14 do
   @xdim 128
   @ydim 128
   @size @xdim*@ydim
@@ -121,20 +121,20 @@ string = input |> String.trim
 
 hashlist =
   for(n <- 0..127, do: "#{string}-#{n}")
-  |> Enum.map(&Star10.knot_hash/1)
+  |> Enum.map(&Day10.knot_hash/1)
 
 hashlist
-  |> Star14.used_blocks
+  |> Day14.used_blocks
   |> (&"The are #{&1} used blocks.").()
   |> IO.puts
 
 hashlist
-  |> Star14.grid
-  |> Star14.display
+  |> Day14.grid
+  |> Day14.display
   |> IO.puts
 
 hashlist
-  |> Star14.grid
-  |> Star14.regions
+  |> Day14.grid
+  |> Day14.regions
   |> (&"The are #{&1} regions.").()
   |> IO.puts

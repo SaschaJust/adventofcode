@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_11.input")
 
-defmodule Star11 do
+defmodule Day11 do
   def step([ "ne" | remainder ], {x, y, z}, max_distance) do
     step(remainder, {x+1, y-1, z}, max(max_distance, {x, y, z} |> distance))
   end
@@ -37,6 +37,6 @@ end
 input \
   |> String.trim
   |> String.split(",")
-  |> Star11.step({0, 0, 0}, 0)
+  |> Day11.step({0, 0, 0}, 0)
   |> IO.inspect
 # result: {707, 1490}

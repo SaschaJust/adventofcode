@@ -5,7 +5,7 @@ input_gen_b = 771
 # input_gen_a = 65
 # input_gen_b = 8921
 
-defmodule Star15 do
+defmodule Day15 do
   @seed_a 16807
   @seed_b 48271
   @rem 2147483647
@@ -29,10 +29,10 @@ defmodule Star15 do
   end
 end
 
-Star15.agreements(input_gen_a,input_gen_b,40000000)
+Day15.agreements(input_gen_a,input_gen_b,40000000)
   |> (&"There are #{&1} agreements.").()
   |> IO.inspect
 
-Star15.agreements(input_gen_a,input_gen_b,5000000,4,8)
+Day15.agreements(input_gen_a,input_gen_b,5000000,4,8)
   |> (&"There are #{&1} agreements.").()
   |> IO.inspect

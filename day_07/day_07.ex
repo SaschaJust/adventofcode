@@ -6,7 +6,7 @@ map_list = input
   |> Enum.map(fn x -> ~r/(?<name>\S+) \((?<weight>\d+)\)( -> (?<children>.*))?/
     |> Regex.named_captures(x) end)
 
-defmodule Star07 do
+defmodule Day07 do
 
   def find_root([ %{"name" => _, "weight" => _, "children" => ""} | remainder ], lhs, rhs) do
     find_root(remainder, lhs, rhs)
@@ -44,7 +44,7 @@ defmodule Star07 do
   def find_imbalance(root, tree, imbalance) do
     {weight, list} = Map.get(tree, root)
 
-    subgroups = list |> Enum.map(fn x -> {x, Star07.compute_weight(x, tree)} end)
+    subgroups = list |> Enum.map(fn x -> {x, Day07.compute_weight(x, tree)} end)
       |> Enum.group_by(fn {_, weight} -> weight end)
       |> Map.to_list
 
@@ -56,8 +56,8 @@ defmodule Star07 do
   end
 end
 
-root = map_list |> Star07.find_root(MapSet.new(), MapSet.new())
+root = map_list |> Day07.find_root(MapSet.new(), MapSet.new())
 root |> IO.puts
 
-tree = map_list |> Star07.build_tree(Map.new())
-root |> Star07.find_imbalance(tree, 0) |> IO.puts
+tree = map_list |> Day07.build_tree(Map.new())
+root |> Day07.find_imbalance(tree, 0) |> IO.puts

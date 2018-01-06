@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_20.input")
 
-defmodule Star20 do
+defmodule Day20 do
   @give_up 100
 
   def manhattan({x, y, z}) do
@@ -34,17 +34,17 @@ particles = input
   |> Enum.with_index
 
 particles
-  |> Enum.group_by(fn({{_, _, a}, _}) -> a |> Star20.manhattan end)
+  |> Enum.group_by(fn({{_, _, a}, _}) -> a |> Day20.manhattan end)
   |> Map.to_list
   |> Enum.min_by(fn({key, _}) -> key end)
   |> elem(1)
-  |> Enum.min_by(fn({{_, v, _}, _}) -> v |> Star20.manhattan end)
+  |> Enum.min_by(fn({{_, v, _}, _}) -> v |> Day20.manhattan end)
   |> elem(1)
   |> (&"Particle number #{&1} will stay closed to (0, 0, 0) in the long run.").()
   |> IO.puts
 
 particles
-  |> Star20.simulate(0)
+  |> Day20.simulate(0)
   |> Enum.count
   |> (&"There are #{&1} particles left.").()
   |> IO.puts

@@ -1,6 +1,6 @@
 input = 382
 
-defmodule Star17 do
+defmodule Day17 do
   def insert(buffer,_,_,_,0) do
     buffer
   end
@@ -20,7 +20,7 @@ defmodule Star17 do
   end
 end
 
-Star17.insert([0], 0, 1, input, 2017)
+Day17.insert([0], 0, 1, input, 2017)
   |> Enum.chunk_by((&Kernel.==(&1,2017)))
   |> Enum.reverse
   |> Enum.at(0)
@@ -28,6 +28,6 @@ Star17.insert([0], 0, 1, input, 2017)
   |> (&"The value after 2017 is: #{&1}").()
   |> IO.puts
 
-Star17.short_circuit(0, 1, input, 50000000, 0)
+Day17.short_circuit(0, 1, input, 50000000, 0)
   |> (&"The value after 0 is: #{&1}").()
   |> IO.puts

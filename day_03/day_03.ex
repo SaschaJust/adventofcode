@@ -1,6 +1,6 @@
 input = 368078
 
-defmodule Star03 do
+defmodule Day03 do
   def part1(block, {x, y}, step, direction, index, target) do
     cond do
       index >= target -> abs(x) + abs(y)
@@ -51,10 +51,10 @@ defmodule Star03 do
   end
 end
 
-Star03.part1(0, {0, 0}, 1, 0, 1, input)
+Day03.part1(0, {0, 0}, 1, 0, 1, input)
 |> IO.puts
 # result: 371
 
-Star03.part2(0, {0, 0}, 1, 0, Map.new([{{0,0}, 1}]), 0, input)
+Day03.part2(0, {0, 0}, 1, 0, Map.new([{{0,0}, 1}]), 0, input)
 |> IO.puts
 # result: 369601

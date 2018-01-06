@@ -1,6 +1,6 @@
 {:ok, input} = File.read("star_16.input")
 
-defmodule Star16 do
+defmodule Day16 do
   def swap(state, first, second) do
     state |> List.replace_at(first, state |> Enum.at(second)) |> List.replace_at(second, state |> Enum.at(first))
   end
@@ -23,7 +23,7 @@ defmodule Star16 do
   end
 
   def round(instructions, state) do
-      instructions |> Enum.reduce(state, fn(x, acc) -> x |> Star16.dance(acc) end)
+      instructions |> Enum.reduce(state, fn(x, acc) -> x |> Day16.dance(acc) end)
   end
 
   def perform(instructions, state, counter \\ 1)
@@ -51,14 +51,14 @@ cycle_length =
 input
   |> String.trim
   |> String.split(",")
-  |> Star16.cycle_length(initial, initial, 1)
+  |> Day16.cycle_length(initial, initial, 1)
 
 cycle_length |> IO.puts
 
 input
   |> String.trim
   |> String.split(",")
-  |> Star16.perform(initial, cycle_length)
+  |> Day16.perform(initial, cycle_length)
   |> Enum.join
   |> (&"Program order: #{&1}").()
   |> IO.puts
@@ -66,7 +66,7 @@ input
 input
   |> String.trim
   |> String.split(",")
-  |> Star16.perform(initial, rem(1000000000, cycle_length))
+  |> Day16.perform(initial, rem(1000000000, cycle_length))
   |> Enum.join
   |> (&"Program order: #{&1}").()
   |> IO.puts
