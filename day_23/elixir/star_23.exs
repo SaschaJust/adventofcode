@@ -1,6 +1,6 @@
-{:ok, input} = File.read("star_22.input")
+{:ok, input} = File.read("../star_23.input")
 
-defmodule Day22 do
+defmodule Day23 do
   def value(registers, token) do
     case Integer.parse(token) do
       :error -> registers |> Map.get(token, 0)
@@ -18,7 +18,6 @@ defmodule Day22 do
   end
 
   def process(["sub", reg, val], registers, pc) do
-    if reg == "h", do: registers |> IO.inspect
     {registers |> Map.put(reg, Map.get(registers, reg, 0) - value(registers, val)), pc+1}
   end
 
@@ -32,6 +31,21 @@ defmodule Day22 do
       true -> registers |> Map.get(:muls)
     end
   end
+
+  def is_prime?(2), do: true
+
+  def is_prime?(x) when x>1 do
+    (2..round(Float.ceil(:math.sqrt(x)))
+      |> Enum.filter(fn a -> rem(x, a) == 0 end))
+      |> length() == 0
+  end
+
+  def count_none_prime(from, to, interval \\ 1) do
+    Stream.iterate(from, &(&1+interval))
+      |> Enum.take(div(to-from,interval)+1)
+      |> Stream.filter(&Kernel.not(is_prime?(&1)))
+      |> Enum.to_list
+  end
 end
 
 program = input
@@ -42,4 +56,13 @@ program = input
   |> Enum.map(fn({x, y}) -> {y, x} end)
   |> Map.new
 
-Day22.execute({%{"c" => 1}, 0}, program) |> IO.puts
+Day23.execute({%{}, 0}, program)
+  |> (&"The instruction 'mul' is called #{&1} times.").()
+  |> IO.puts
+
+# Part 2 counts the number of none-prime between b and c in steps of size 17.
+# That's the resulting value in h.
+Day23.count_none_prime(108100, 125100, 17)
+  |> Enum.count
+  |> (&"The final value of h (the number of none-prime number between b=108100 and c=125100 in steps of size 17) is #{&1}.").()
+  |> IO.puts

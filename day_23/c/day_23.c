@@ -1,38 +1,31 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int is_prime(int number)
+{
+     if (number <= 1) return 0;
+     if (number % 2 == 0 && number > 2) return 0;
+     for(int i = 3; i <= (int)ceil(sqrt(number)); i+= 2)
+     {
+         if (number % i == 0)
+             return 0;
+     }
+     return 1;
+}
 
 int main(int argc, char const *argv[]) {
-  /* code */
-  // int b = 108000;
-  // int c = 125100;
-  int b = 81;
-  int c = 81;
-  int g = 0;
   int h = 0;
+  int b = 108100;
+  int c = 125100;
 
-  do {
-    int f = 1;
-    int d = 2;
-
-    do {
-      int e = 2;
-      do {
-        if (d*e==b) {
-          f = 0;
-        }
-
-        e++;
-      } while(e != b);
-
-      d++;
-    } while(d != b);
-
-    if (f == 0) {
-      h++;
+  for (; b <= c; b+=17) {
+    if (!is_prime(b)) {
+      ++h;
     }
+  }
 
-    b +=17;
-  } while(b - c - 17 != 0);
+  printf("Number of none primes in steps of size 17 between %i and %i is: %i\n", b, c, h);
 
-  printf("%i\n", h);
   return 0;
 }
