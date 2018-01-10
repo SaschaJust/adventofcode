@@ -16,32 +16,23 @@ int main(int argc, char const *argv[]) {
     do {
       int e = 2;
       do {
-        g = d*e-b;
-
-        if (g==0) {
+        if (d*e==b) {
           f = 0;
         }
 
         e++;
-        g = e - b;
-      } while(g != 0);
+      } while(e != b);
 
       d++;
-      g = d - b;
-    } while(g != 0);
+    } while(d != b);
 
     if (f == 0) {
       h++;
     }
 
-    g = b - c;
-    if (g == 0) {
-      printf("%i\n", h);
-      return 0;
-    }
-
     b +=17;
-  } while(g != 0);
+  } while(b - c - 17 != 0);
 
+  printf("%i\n", h);
   return 0;
 }
