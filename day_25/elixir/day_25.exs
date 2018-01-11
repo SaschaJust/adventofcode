@@ -1,42 +1,19 @@
 use Bitwise
 
+IO.puts "Day 25: The Halting Problem"
+
 defmodule Day25 do
-  @compile {:inline, translate: 1}
-  def translate(position) do
-    cond do
-      position < 0 -> 2*(-position)
-      true -> 2*position + 1
-    end
-  end
+  @compile{:inline, get: 2}
+  defp get(band, position), do: Map.get(band, position, 0)
+  
+  @compile{:inline, set: 3}
+  defp set(band, position, 0), do: Map.delete(band, position)
+  defp set(band, position, value), do: Map.put(band, position, value)
 
-  def get(band, position) do
-    index = position |> translate
-    cond do
-      index > bit_size(band) -> 0
-      true -> offset = index - 1
-           <<_::size(offset),bit::1,_::bitstring>> = band
-           bit
-    end
-  end
-
-  def set(band, position, value) when value <= 1 do
-    index = position |> translate
-    offset = index - 1
-
-    band =
-    cond do
-      bit_size(band) <= index -> append_size = bit_size(band); band <> <<0::size(append_size)>>
-      true -> band
-    end
-
-    <<lhs::size(offset), _::size(1), rhs::bitstring>> = band
-    <<lhs::size(offset), value::size(1), rhs::bitstring>>
-  end
-
-  def act(band \\ <<0::size(1_000_000)>>, position \\ 0, state \\ :A, pc \\ 0)
+  def act(band \\ Map.new, position \\ 0, state \\ :A, pc \\ 0)
 
   def act(band, _, _, 12_919_244) do
-    for(<<bit::1 <- band>>, do: bit) |> Enum.sum
+    Map.size(band)
   end
 
   def act(band, position, :A, pc) do
