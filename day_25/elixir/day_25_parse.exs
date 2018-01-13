@@ -1,6 +1,6 @@
 IO.puts "Day 25: The Halting Problem"
 
-blocks = case File.read("../day_25.input") do
+blocks = case File.read((__ENV__.file |> Path.dirname) <> "/../day_25.input") do
   {:ok, content} -> content |> String.trim |> String.split("\n\n")
   _ -> raise "Could not find input file. Please run from the exs file location."
 end

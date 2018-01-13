@@ -1,4 +1,9 @@
-input = 382
+IO.puts "Day 17: Spinlock"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_17.input") do
+  {:ok, content} -> content |> String.trim |> String.to_integer
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day17 do
   def insert(buffer,_,_,_,0) do
@@ -21,13 +26,13 @@ defmodule Day17 do
 end
 
 Day17.insert([0], 0, 1, input, 2017)
-  |> Enum.chunk_by((&Kernel.==(&1,2017)))
+  |> Enum.chunk_by(&Kernel.==(&1, 2017))
   |> Enum.reverse
-  |> Enum.at(0)
-  |> Enum.at(0)
+  |> List.first
+  |> List.first
   |> (&"The value after 2017 is: #{&1}").()
   |> IO.puts
 
-Day17.short_circuit(0, 1, input, 50000000, 0)
+Day17.short_circuit(0, 1, input, 50_000_000, 0)
   |> (&"The value after 0 is: #{&1}").()
   |> IO.puts

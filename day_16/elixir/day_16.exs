@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_16.input")
+IO.puts "Day 16: Permutation Promenade"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_16.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day16 do
   def swap(state, first, second) do
@@ -47,26 +52,23 @@ end
 
 initial = for(i<-0..15, do: <<?a+i>>)
 
-cycle_length =
-input
+cycle_length = input
   |> String.trim
   |> String.split(",")
   |> Day16.cycle_length(initial, initial, 1)
 
-cycle_length |> IO.puts
-
 input
   |> String.trim
   |> String.split(",")
-  |> Day16.perform(initial, cycle_length)
+  |> Day16.perform(initial, 1)
   |> Enum.join
-  |> (&"Program order: #{&1}").()
+  |> (&"Program order after the dance: #{&1}").()
   |> IO.puts
 
 input
   |> String.trim
   |> String.split(",")
-  |> Day16.perform(initial, rem(1000000000, cycle_length))
+  |> Day16.perform(initial, rem(1_000_000_000, cycle_length))
   |> Enum.join
-  |> (&"Program order: #{&1}").()
+  |> (&"Program order after a billion dances: #{&1}").()
   |> IO.puts

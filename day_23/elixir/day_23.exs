@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../star_23.input")
+IO.puts "Day 23: Coprocessor Conflagration"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_23.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day23 do
   def value(registers, token) do

@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_18.input")
+IO.puts "Day 18: Duet"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_18.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day18 do
   def value(registers, token) do
@@ -44,7 +49,7 @@ defmodule Day18 do
         # part 1
         self() == pid and value(registers, val) != 0 -> {registers, -1}
         # part 2
-        true -> {Map.put(registers, val, value), pc+1}
+        true -> { Map.put(registers, val, value), pc+1 }
       end
     after 1_000 -> {registers, -1}
     end
@@ -59,12 +64,7 @@ defmodule Day18 do
 
   def execute(program, id) do
     receive do
-      {:task,%{:owner=> _, :pid=> pid, :ref=> _}} -> execute({%{"p" => id}, 0}, program, pid)
-                      |> Tuple.to_list
-                      |> Enum.at(0)
-                      |> Map.get("snd")
-                      |> (&"Program #{id} result value #{&1}.").()
-                      |> IO.puts
+      {:task,%{:owner => _, :pid => pid, :ref => _}} -> execute({%{"p" => id}, 0}, program, pid) |> elem(0) |> Map.get("snd")
       {_, message} -> raise "Invalid message received: #{message}"
     end
   end
@@ -78,14 +78,12 @@ program = input
   |> Enum.map(fn({x, y}) -> {y, x} end)
   |> Map.new
 
-IO.puts "Part 1:"
-task0 = Task.async fn->Day18.execute(program, 0) end
+task0 = Task.async fn->Day18.execute(program, 0) |> (&"The value of the recovered frequency is #{&1}.").() |> IO.puts end
 send Map.fetch!(task0, :pid), {:task, task0}
 Task.await(task0)
 
-IO.puts "Part 2:"
 task0 = Task.async fn->Day18.execute(program, 0) end
-task1 = Task.async fn->Day18.execute(program, 1) end
+task1 = Task.async fn->Day18.execute(program, 1) |> (&"Program 1 result value #{&1}.").() |> IO.puts end
 
 send Map.fetch!(task0, :pid), {:task, task1}
 send Map.fetch!(task1, :pid), {:task, task0}

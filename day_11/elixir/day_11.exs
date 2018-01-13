@@ -1,6 +1,13 @@
-{:ok, input} = File.read("../day_11.input")
+IO.puts "Day 11: Hex Ed"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_11.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day11 do
+  def step(list, coordinates \\ {0, 0, 0}, max_distance \\ 0)
+
   def step([ "ne" | remainder ], {x, y, z}, max_distance) do
     step(remainder, {x+1, y-1, z}, max(max_distance, {x, y, z} |> distance))
   end
@@ -34,9 +41,11 @@ defmodule Day11 do
   end
 end
 
-input \
+result = input
   |> String.trim
   |> String.split(",")
-  |> Day11.step({0, 0, 0}, 0)
-  |> IO.inspect
+  |> Day11.step
+
+result |> (&"Fewest number of steps required are #{&1 |> elem(0)}.").() |> IO.puts
+result |> (&"The furthest he got away from origin is #{&1 |> elem(1)} steps.").() |> IO.puts
 # result: {707, 1490}

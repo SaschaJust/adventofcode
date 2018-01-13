@@ -1,0 +1,3 @@
+Day 23: Coprocessor Conflagration
+The instruction 'mul' is called 6241 times.
+The final value of h (the number of none-prime number between b=108100 and c=125100 in steps of size 17) is 909.

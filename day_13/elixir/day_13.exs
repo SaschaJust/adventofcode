@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_13.input")
+IO.puts "Day 13: Packet Scanners"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_13.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day13 do
   def severity([{level, depth} | tail], offset) do
@@ -43,8 +48,16 @@ list = input
   |> String.trim
   |> String.split("\n")
   |> Enum.map(fn x -> String.split(x, ": ")
-    |> Enum.map(&String.to_integer/1)
-    |> List.to_tuple end)
+                      |> Enum.map(&String.to_integer/1)
+                      |> List.to_tuple
+    end)
 
-list |> Day13.severity(0) |> IO.puts
-list |> Day13.find_offset(0) |> IO.puts
+list
+  |> Day13.severity(0)
+  |> (&"The severity of the whole trip is #{&1}.").()
+  |> IO.puts
+
+list
+  |> Day13.find_offset(0)
+  |> (&"The fewest number of picoseconds need for delay is #{&1}.").()
+  |> IO.puts

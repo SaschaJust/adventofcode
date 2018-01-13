@@ -1,10 +1,15 @@
-{:ok, input} = File.read("../day_05.input")
+IO.puts "Day 05: A Maze of Twisty Trampolines, All Alikev"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_05.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 map = input
   |> String.trim
   |> String.split("\n")
   |> Enum.with_index
-  |> Enum.map(fn {x, y} -> {y,String.to_integer x} end)
+  |> Enum.map(fn {x, y} -> {y, String.to_integer x} end)
   |> Map.new
 
 defmodule Day05 do
@@ -23,7 +28,14 @@ defmodule Day05 do
   end
 end
 
-map |> Day05.jump1(0, 0) |> IO.puts
+map
+  |> Day05.jump1(0, 0)
+  |> (&"It takes #{&1} steps to reach the exit.").()
+  |> IO.puts
 # result: 374269
-map |> Day05.jump2(0, 0) |> IO.puts
+
+map
+  |> Day05.jump2(0, 0)
+  |> (&"It takes #{&1} steps to reach the exit.").()
+  |> IO.puts
 # result: 27720699

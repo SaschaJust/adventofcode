@@ -1,14 +1,22 @@
 use Bitwise
-input_gen_a = 679
-input_gen_b = 771
 
-# input_gen_a = 65
-# input_gen_b = 8921
+IO.puts "Day 15: Dueling Generators"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_15.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
+
+gen_inputs = input
+  |> String.trim
+  |> String.split("\n")
+  |> Enum.map(fn x -> x |> String.split(" ") |> List.last |> String.to_integer end)
+  |> List.to_tuple
 
 defmodule Day15 do
-  @seed_a 16807
-  @seed_b 48271
-  @rem 2147483647
+  @seed_a 16_807
+  @seed_b 48_271
+  @rem 2_147_483_647
 
   def generate(_, _, 0, _) do
     []
@@ -20,19 +28,18 @@ defmodule Day15 do
       0 -> [ p | generate(p, seed, count-1, mod) ]
       _ -> generate(p, seed, count, mod)
     end
-
   end
 
-  def agreements(input_a, input_b, iterations, mod_a \\ 1, mod_b \\ 1) do
+  def agreements({input_a, input_b}, iterations, mod_a \\ 1, mod_b \\ 1) do
     Enum.zip(input_a |> generate(@seed_a, iterations, mod_a), input_b |> generate(@seed_b, iterations, mod_b))
-      |> Enum.count(fn({a,b}) -> (a&&&0xFFFF) == (b&&&0xFFFF) end)
+      |> Enum.count(fn {a,b} -> (a&&&0xFFFF) == (b&&&0xFFFF) end)
   end
 end
 
-Day15.agreements(input_gen_a,input_gen_b,40000000)
+Day15.agreements(gen_inputs, 40_000_000)
   |> (&"There are #{&1} agreements.").()
-  |> IO.inspect
+  |> IO.puts
 
-Day15.agreements(input_gen_a,input_gen_b,5000000,4,8)
+Day15.agreements(gen_inputs, 5_000_000, 4, 8)
   |> (&"There are #{&1} agreements.").()
-  |> IO.inspect
+  |> IO.puts

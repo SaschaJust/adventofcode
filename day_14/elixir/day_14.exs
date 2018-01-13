@@ -1,5 +1,11 @@
 use Bitwise
-{:ok, input} = File.read("../day_14.input")
+
+IO.puts "Day 14: Disk Defragmentation"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_14.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do
@@ -128,10 +134,10 @@ hashlist
   |> (&"The are #{&1} used blocks.").()
   |> IO.puts
 
-hashlist
-  |> Day14.grid
-  |> Day14.display
-  |> IO.puts
+# hashlist
+#   |> Day14.grid
+#   |> Day14.display
+#   |> IO.puts
 
 hashlist
   |> Day14.grid

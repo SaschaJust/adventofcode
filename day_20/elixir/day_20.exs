@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_20.input")
+IO.puts "Day 20: Particle Swarm"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_20.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day20 do
   @give_up 100
@@ -33,11 +38,11 @@ particles = input
   |> Enum.with_index
 
 particles
-  |> Enum.group_by(fn({{_, _, a}, _}) -> a |> Day20.manhattan end)
+  |> Enum.group_by(fn {{_, _, a}, _} -> a |> Day20.manhattan end)
   |> Map.to_list
-  |> Enum.min_by(fn({key, _}) -> key end)
+  |> Enum.min_by(fn {key, _} -> key end)
   |> elem(1)
-  |> Enum.min_by(fn({{_, v, _}, _}) -> v |> Day20.manhattan end)
+  |> Enum.min_by(fn {{_, v, _}, _} -> v |> Day20.manhattan end)
   |> elem(1)
   |> (&"Particle number #{&1} will stay closed to (0, 0, 0) in the long run.").()
   |> IO.puts

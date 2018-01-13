@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_07.input")
+IO.puts "Day 07: Recursive Circus"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_07.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 map_list = input
   |> String.trim
@@ -16,7 +21,7 @@ defmodule Day07 do
     find_root(
       remainder,
       MapSet.put(lhs, name),
-      (children |> String.split(", ") |> Enum.reduce(rhs, fn (x, res) -> MapSet.put(res, x) end))
+      (children |> String.split(", ") |> Enum.reduce(rhs, fn x, res -> MapSet.put(res, x) end))
     )
   end
 
@@ -37,7 +42,7 @@ defmodule Day07 do
   def compute_weight(root, map) do
     case Map.get(map, root) do
       {weight, [""]} -> weight
-      {weight, list} -> weight + Enum.reduce(list, 0, fn (x, acc) -> acc + compute_weight(x, map) end)
+      {weight, list} -> weight + Enum.reduce(list, 0, fn x, acc -> acc + compute_weight(x, map) end)
     end
   end
 
@@ -57,7 +62,12 @@ defmodule Day07 do
 end
 
 root = map_list |> Day07.find_root(MapSet.new(), MapSet.new())
-root |> IO.puts
+root
+  |> (&"The name of the bottom program is '#{&1}'.").()
+  |> IO.puts
 
 tree = map_list |> Day07.build_tree(Map.new())
-root |> Day07.find_imbalance(tree, 0) |> IO.puts
+root
+  |> Day07.find_imbalance(tree, 0)
+  |> (&"The weight of the one program with wrong weight needs to be #{&1}.").()
+  |> IO.puts

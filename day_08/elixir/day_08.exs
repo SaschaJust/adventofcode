@@ -1,4 +1,9 @@
-{:ok, input} = File.read("../day_08.input")
+IO.puts "Day 08: I Heard You Like Registers"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_08.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 map_list = input
   |> String.trim
@@ -9,26 +14,26 @@ map_list = input
 defmodule Day08 do
   def fun(operator) do
     case operator do
-      "<=" -> &<=/2
-      "<" -> &</2
-      ">=" -> &>=/2
-      ">" -> &>/2
-      "==" -> &==/2
-      "!=" -> &!=/2
-      "inc" -> &(&1+&2)
-      "dec" -> &(&1-&2)
+      "<="  -> &<=/2
+      "<"   -> &</2
+      ">="  -> &>=/2
+      ">"   -> &>/2
+      "=="  -> &==/2
+      "!="  -> &!=/2
+      "inc" -> &+/2
+      "dec" -> &-/2
     end
   end
 
   def process([ %{"name" => name, "instruction" => instruction, "delta" => delta, "lhs" => lhs, "op" => op, "rhs" => rhs} | remainder ], registers, max) do
-    if Day08.fun(op).(
+    if fun(op).(
       Map.get(registers, lhs, 0),
       String.to_integer(rhs)
     ) do
-      new_value = Day08.fun(instruction).(
+      new_value = fun(instruction).(
         Map.get(registers, name, 0),
         String.to_integer(delta)
-      );
+      )
       process(remainder, Map.put(registers, name, new_value), max(max, new_value))
     else
       process(remainder, registers, max)
@@ -40,4 +45,7 @@ defmodule Day08 do
   end
 end
 
-map_list |> Day08.process(Map.new(), 0) |> IO.inspect
+result = map_list |> Day08.process(Map.new, 0)
+
+IO.puts "The largest value in any register at the end is #{result |> elem(0)}."
+IO.puts "The largest value in any register at any given times is #{result |> elem(1)}."

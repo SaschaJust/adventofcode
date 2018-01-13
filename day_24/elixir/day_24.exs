@@ -1,4 +1,9 @@
-{ :ok, input } = File.read("../day_24.input")
+IO.puts "Day 24: Electromagnetic Moat"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_24.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day24 do
 

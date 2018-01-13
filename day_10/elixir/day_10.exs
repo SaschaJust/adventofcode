@@ -1,5 +1,11 @@
 use Bitwise
-{:ok, input} = File.read("../day_10.input")
+
+IO.puts "Day 10: Knot Hash"
+
+input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_10.input") do
+  {:ok, content} -> content
+  _ -> raise "Could not find input file. Please run from the exs file location."
+end
 
 defmodule Day10 do
   def reverse({rev_rhs, rev_lhs}, {const_lhs, const_rhs}) do
@@ -31,11 +37,11 @@ defmodule Day10 do
 
   def knot_hash(input) do
     Enum.to_list(1..64)
-      |> Enum.reduce([], fn(_, acc) -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
-      |> Day10.pinch(Enum.to_list(0..255), 0, 0)
+      |> Enum.reduce([], fn _, acc -> acc ++ (input |> String.trim |> to_charlist) ++ [17,31,73,47,23] end)
+      |> pinch(Enum.to_list(0..255), 0, 0)
       |> Enum.chunk_every(16)
       |> Enum.map(fn x -> x |> Enum.reduce(0, &^^^/2) end)
-      |> Enum.reduce("", fn(x, acc) -> acc <> Base.encode16(<<x>>) end)
+      |> Enum.reduce("", fn x, acc -> acc <> Base.encode16(<<x>>) end)
   end
 end
 
@@ -45,9 +51,13 @@ input
   |> Enum.map(&String.to_integer/1)
   |> Day10.pinch(Enum.to_list(0..255), 0, 0)
   |> Enum.take(2)
-  |> Enum.reduce(1, &*/2)
+  |> Enum.reduce(&*/2)
+  |> (&"The result of multiplying the first two numbers in the list is #{&1}.").()
   |> IO.puts
 # result: 4114
 
-input |> Day10.knot_hash |> IO.puts
+input
+  |> Day10.knot_hash
+  |> (&"The knot hash is #{&1}.").()
+  |> IO.puts
 # result: 2F8C3D2100FDD57CEC130D928B0FD2DD
