@@ -1,4 +1,2 @@
 language: elixir
 elixir: '1.5.2'
-install: 
-script: elixir test/test.exs
