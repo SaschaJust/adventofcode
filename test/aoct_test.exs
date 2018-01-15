@@ -14,7 +14,7 @@ defmodule AoctTest do
           }).()
       end)
       |> Enum.map(fn {test,execution,expected} ->
-        {result, time} = Task.await(execution, 60_000)
+        {result, time} = Task.await(execution, 300_000)
         cond do
           result == expected -> IO.puts "Test #{test} passed in #{time} seconds."; 0
           true -> IO.puts "Test #{test} failed in #{time} seconds: +#{inspect result}\n-#{inspect expected}"; 1
