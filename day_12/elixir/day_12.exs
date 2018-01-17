@@ -32,9 +32,9 @@ map = input
   |> Enum.reduce(Map.new, fn [x,y], acc -> acc |> Map.put(x |> String.to_integer, y |> String.split(", ") |> Enum.map(&String.to_integer/1)) end)
 
 group = map |> Day12.connected(MapSet.new, 0)
-group |> MapSet.size |> (&"There are #{&1} programs in the group thats contains program ID 0.").() |> IO.puts
+group |> MapSet.size |> (&"Part 1: There are #{&1} programs in the group thats contains program ID 0.").() |> IO.puts
 
-map |> Day12.groups |> (&"There are #{&1} groups in total.").() |> IO.puts
+map |> Day12.groups |> (&"Part 2: There are #{&1} groups in total.").() |> IO.puts
 
 # group
 #   |> MapSet.to_list

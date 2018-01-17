@@ -78,12 +78,12 @@ program = input
   |> Enum.map(fn({x, y}) -> {y, x} end)
   |> Map.new
 
-task0 = Task.async fn->Day18.execute(program, 0) |> (&"The value of the recovered frequency is #{&1}.").() |> IO.puts end
+task0 = Task.async fn->Day18.execute(program, 0) |> (&"Part 1: The value of the recovered frequency is #{&1}.").() |> IO.puts end
 send Map.fetch!(task0, :pid), {:task, task0}
 Task.await(task0)
 
 task0 = Task.async fn->Day18.execute(program, 0) end
-task1 = Task.async fn->Day18.execute(program, 1) |> (&"Program 1 result value #{&1}.").() |> IO.puts end
+task1 = Task.async fn->Day18.execute(program, 1) |> (&"Part 2: Program 1 result value #{&1}.").() |> IO.puts end
 
 send Map.fetch!(task0, :pid), {:task, task1}
 send Map.fetch!(task1, :pid), {:task, task0}

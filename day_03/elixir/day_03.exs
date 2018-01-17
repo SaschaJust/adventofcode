@@ -61,11 +61,11 @@ defmodule Day03 do
 end
 
 Day03.part1(0, {0, 0}, 1, 0, 1, input)
-  |> (&"I requires #{&1} steps to carry the data from the square all the way to the access port.").()
+  |> (&"Part 1: I requires #{&1} steps to carry the data from the square all the way to the access port.").()
   |> IO.puts
 # result: 371
 
 Day03.part2(0, {0, 0}, 1, 0, Map.new([{{0,0}, 1}]), 0, input)
-  |> (&"The first value written that is larger than the input is #{&1}.").()
+  |> (&"Part 2: The first value written that is larger than the input is #{&1}.").()
   |> IO.puts
 # result: 369601

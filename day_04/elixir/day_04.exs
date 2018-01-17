@@ -14,7 +14,7 @@ input
       |> (&Enum.count(&1) == (&1 |> Enum.uniq |> Enum.count)).()
     ) end)
   |> Enum.count
-  |> (&"There are #{&1} valid phrases.").()
+  |> (&"Part 1: There are #{&1} valid phrases.").()
   |> IO.puts
 # result: 383
 
@@ -28,6 +28,6 @@ input
       |> (&Enum.count(&1) == (&1 |> Enum.uniq |> Enum.count)).()
     ) end)
   |> Enum.count
-  |> (&"There are #{&1} valid phrases under the new system policy.").()
+  |> (&"Part 2: There are #{&1} valid phrases under the new system policy.").()
   |> IO.puts
 # result 265

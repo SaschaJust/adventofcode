@@ -145,9 +145,9 @@ rulebook = input
 # rulebook |> Day21.print |> IO.puts
 
 Day21.enhance(image, rulebook)
-  |> (&"There are #{&1} active pixels after 5 iterations.").()
+  |> (&"Part 1: There are #{&1} active pixels after 5 iterations.").()
   |> IO.puts
 
 Day21.enhance(image, rulebook, 18)
-  |> (&"There are #{&1} active pixels after 18 iterations.").()
+  |> (&"Part 2: There are #{&1} active pixels after 18 iterations.").()
   |> IO.puts

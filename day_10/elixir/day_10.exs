@@ -52,12 +52,12 @@ input
   |> Day10.pinch(Enum.to_list(0..255), 0, 0)
   |> Enum.take(2)
   |> Enum.reduce(&*/2)
-  |> (&"The result of multiplying the first two numbers in the list is #{&1}.").()
+  |> (&"Part 1: The result of multiplying the first two numbers in the list is #{&1}.").()
   |> IO.puts
 # result: 4114
 
 input
   |> Day10.knot_hash
-  |> (&"The knot hash is #{&1}.").()
+  |> (&"Part 2: The knot hash is #{&1}.").()
   |> IO.puts
 # result: 2F8C3D2100FDD57CEC130D928B0FD2DD

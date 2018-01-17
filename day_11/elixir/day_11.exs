@@ -46,6 +46,6 @@ result = input
   |> String.split(",")
   |> Day11.step
 
-result |> (&"Fewest number of steps required are #{&1 |> elem(0)}.").() |> IO.puts
-result |> (&"The furthest he got away from origin is #{&1 |> elem(1)} steps.").() |> IO.puts
+result |> (&"Part 1: Fewest number of steps required are #{&1 |> elem(0)}.").() |> IO.puts
+result |> (&"Part 2: The furthest he got away from origin is #{&1 |> elem(1)} steps.").() |> IO.puts
 # result: {707, 1490}

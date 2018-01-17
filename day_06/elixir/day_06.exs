@@ -69,10 +69,10 @@ end
 
 map
   |> Day06.balance1(MapSet.new(), 0)
-  |> (&"#{&1} redistribution cycles must be completed before a configuration is produced that has been seen before.").()
+  |> (&"Part 1: #{&1} redistribution cycles must be completed before a configuration is produced that has been seen before.").()
   |> IO.puts
 
 map
   |> Day06.balance2(MapSet.new(), nil, 0)
-  |> (&"There are #{&1} cycles in the infinite loop that arises from the configuration.").()
+  |> (&"Part 2: There are #{&1} cycles in the infinite loop that arises from the configuration.").()
   |> IO.puts

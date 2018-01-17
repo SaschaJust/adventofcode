@@ -62,12 +62,12 @@ program = input
   |> Map.new
 
 Day23.execute({%{}, 0}, program)
-  |> (&"The instruction 'mul' is called #{&1} times.").()
+  |> (&"Part 1: The instruction 'mul' is called #{&1} times.").()
   |> IO.puts
 
 # Part 2 counts the number of none-prime between b and c in steps of size 17.
 # That's the resulting value in h.
 Day23.count_none_prime(108100, 125100, 17)
   |> Enum.count
-  |> (&"The final value of h (the number of none-prime number between b=108100 and c=125100 in steps of size 17) is #{&1}.").()
+  |> (&"Part 2: The final value of h (the number of none-prime number between b=108100 and c=125100 in steps of size 17) is #{&1}.").()
   |> IO.puts

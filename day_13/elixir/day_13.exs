@@ -54,10 +54,10 @@ list = input
 
 list
   |> Day13.severity(0)
-  |> (&"The severity of the whole trip is #{&1}.").()
+  |> (&"Part 1: The severity of the whole trip is #{&1}.").()
   |> IO.puts
 
 list
   |> Day13.find_offset(0)
-  |> (&"The fewest number of picoseconds need for delay is #{&1}.").()
+  |> (&"Part 2: The fewest number of picoseconds need for delay is #{&1}.").()
   |> IO.puts

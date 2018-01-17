@@ -44,11 +44,11 @@ particles
   |> elem(1)
   |> Enum.min_by(fn {{_, v, _}, _} -> v |> Day20.manhattan end)
   |> elem(1)
-  |> (&"Particle number #{&1} will stay closed to (0, 0, 0) in the long run.").()
+  |> (&"Part 1: Particle number #{&1} will stay closed to (0, 0, 0) in the long run.").()
   |> IO.puts
 
 particles
   |> Day20.simulate(0)
   |> Enum.count
-  |> (&"There are #{&1} particles left.").()
+  |> (&"Part 2: There are #{&1} particles left.").()
   |> IO.puts

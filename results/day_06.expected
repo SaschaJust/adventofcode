@@ -1,3 +1,3 @@
 Day 06: Memory Reallocation
-5042 redistribution cycles must be completed before a configuration is produced that has been seen before.
-There are 1086 cycles in the infinite loop that arises from the configuration.
+Part 1: 5042 redistribution cycles must be completed before a configuration is produced that has been seen before.
+Part 2: There are 1086 cycles in the infinite loop that arises from the configuration.

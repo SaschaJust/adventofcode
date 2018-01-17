@@ -62,7 +62,7 @@ input
   |> String.split(",")
   |> Day16.perform(initial, 1)
   |> Enum.join
-  |> (&"Program order after the dance: #{&1}").()
+  |> (&"Part 1: Program order after the dance: #{&1}").()
   |> IO.puts
 
 input
@@ -70,5 +70,5 @@ input
   |> String.split(",")
   |> Day16.perform(initial, rem(1_000_000_000, cycle_length))
   |> Enum.join
-  |> (&"Program order after a billion dances: #{&1}").()
+  |> (&"Part 2: Program order after a billion dances: #{&1}").()
   |> IO.puts

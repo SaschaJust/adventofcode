@@ -20,7 +20,7 @@ input
         |> Enum.reduce({0, -1}, fn x, {sum, sign} -> {sum + sign * x, -sign} end)
         |> elem(0)
     ) end)
-  |> (&"The checksum for the spreadsheet is #{&1}.").()
+  |> (&"Part 1: The checksum for the spreadsheet is #{&1}.").()
   |> IO.puts
 # result: 48357
 
@@ -36,6 +36,6 @@ input
        |> Tuple.to_list
        |> Enum.reduce(0, fn x, result -> if result == 0, do: x, else: div(result, x) end))
     end)
-  |> (&"The sum of each row's result is #{&1}.").()
+  |> (&"Part 2: The sum of each row's result is #{&1}.").()
   |> IO.puts
 # result: 351

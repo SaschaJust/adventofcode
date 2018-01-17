@@ -10,7 +10,7 @@ init = blocks
   |> String.split("\n")
   |> Enum.map(
     fn "Begin" <> remainder   -> {:Start, remainder |> String.split(" ") |> List.last |> String.slice(0..-2) |> String.to_atom}
-       "Perform" <> remainder -> {:Stop, remainder |> String.split(" ") |> Enum.slice(-2..-2) |> List.first |> String.to_integer}
+       "Perform" <> remainder -> {:Stop,  remainder |> String.split(" ") |> Enum.slice(-2..-2) |> List.first |> String.to_integer}
   end)
   |> Map.new
 
@@ -31,9 +31,9 @@ blueprint = blocks
     Map.put(acc, state, rest |> Enum.chunk_every(4) |> Enum.reduce(Map.new, fn [value | ins], acc2 -> Map.put(acc2, value, ins |> List.to_tuple) end)) end)
 
 
-Stream.unfold({ Map.get(init, :Start), Map.new, blueprint, 0, 0 },
-  fn {state, band, blueprint, position, pc} = current -> {new_value, op, new_state} = blueprint |> Map.get(state) |> Map.get(Map.get(band, position, 0))
-      {current, {new_state, (if new_value == 0, do: Map.delete(band, position), else: Map.put(band, position, new_value)), blueprint, op.(position, 1), pc+1}}
+Stream.iterate({ Map.get(init, :Start), Map.new, blueprint, 0, 0 },
+  fn {state, band, blueprint, position, pc} -> {new_value, op, new_state} = blueprint |> Map.get(state) |> Map.get(Map.get(band, position, 0))
+      {new_state, (if new_value == 0, do: Map.delete(band, position), else: Map.put(band, position, new_value)), blueprint, op.(position, 1), pc+1}
    end)
 |> Stream.drop_while(fn {_, _, _, _, pc} -> pc < Map.get(init, :Stop) end)
 |> Stream.take(1)

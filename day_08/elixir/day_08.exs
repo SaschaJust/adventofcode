@@ -47,5 +47,5 @@ end
 
 result = map_list |> Day08.process(Map.new, 0)
 
-IO.puts "The largest value in any register at the end is #{result |> elem(0)}."
-IO.puts "The largest value in any register at any given times is #{result |> elem(1)}."
+IO.puts "Part 1: The largest value in any register at the end is #{result |> elem(0)}."
+IO.puts "Part 2: The largest value in any register at any given times is #{result |> elem(1)}."

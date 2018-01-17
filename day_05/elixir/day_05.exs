@@ -1,4 +1,4 @@
-IO.puts "Day 05: A Maze of Twisty Trampolines, All Alikev"
+IO.puts "Day 05: A Maze of Twisty Trampolines, All Alike"
 
 input = case File.read((__ENV__.file |> Path.dirname) <> "/../day_05.input") do
   {:ok, content} -> content
@@ -30,12 +30,12 @@ end
 
 map
   |> Day05.jump1(0, 0)
-  |> (&"It takes #{&1} steps to reach the exit.").()
+  |> (&"Part 1: It takes #{&1} steps to reach the exit.").()
   |> IO.puts
 # result: 374269
 
 map
   |> Day05.jump2(0, 0)
-  |> (&"It takes #{&1} steps to reach the exit.").()
+  |> (&"Part 2: It takes #{&1} steps to reach the exit.").()
   |> IO.puts
 # result: 27720699

@@ -45,7 +45,7 @@ input
 	|> Enum.zip(list)
 	|> Enum.filter(fn {x, y} -> x == y end)
 	|> Enum.reduce(0 , fn {x, _}, acc -> acc+x end)
-  |> (&"The solution to the capture is #{&1}.").()
+  |> (&"Part 1: The solution to the capture is #{&1}.").()
 	|> IO.puts
 # result: 1034
 
@@ -61,6 +61,6 @@ input
 	|> Enum.zip(list)
 	|> Enum.filter(fn {x, y} -> x == y end)
 	|> Enum.reduce(0 , fn {x, _}, acc -> acc+x end)
-  |> (&"The solution to the new capture is #{&1}.").()
+  |> (&"Part 2: The solution to the new capture is #{&1}.").()
 	|> IO.puts
 # result: 1356

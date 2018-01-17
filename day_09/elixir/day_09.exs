@@ -39,12 +39,12 @@ defmodule Day09 do
   end
 
   def parse("", _, _, garbage_count) do
-    IO.puts "Garbage count: #{garbage_count}"
+    IO.puts "Part 2: Garbage count: #{garbage_count}"
     0
   end
 end
 
 string
   |> Day09.parse
-  |> (&"The total score of all groups is #{&1}.").()
+  |> (&"Part 1: The total score of all groups is #{&1}.").()
   |> IO.puts

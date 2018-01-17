@@ -30,9 +30,9 @@ Day17.insert([0], 0, 1, input, 2017)
   |> Enum.reverse
   |> List.first
   |> List.first
-  |> (&"The value after 2017 is: #{&1}").()
+  |> (&"Part 1: The value after 2017 is: #{&1}").()
   |> IO.puts
 
 Day17.short_circuit(0, 1, input, 50_000_000, 0)
-  |> (&"The value after 0 is: #{&1}").()
+  |> (&"Part 2: The value after 0 is: #{&1}").()
   |> IO.puts

@@ -5,7 +5,7 @@ IO.puts "Day 25: The Halting Problem"
 defmodule Day25 do
   @compile{:inline, get: 2}
   defp get(band, position), do: Map.get(band, position, 0)
-  
+
   @compile{:inline, set: 3}
   defp set(band, position, 0), do: Map.delete(band, position)
   defp set(band, position, value), do: Map.put(band, position, value)

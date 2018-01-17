@@ -63,11 +63,11 @@ end
 
 root = map_list |> Day07.find_root(MapSet.new(), MapSet.new())
 root
-  |> (&"The name of the bottom program is '#{&1}'.").()
+  |> (&"Part 1: The name of the bottom program is '#{&1}'.").()
   |> IO.puts
 
 tree = map_list |> Day07.build_tree(Map.new())
 root
   |> Day07.find_imbalance(tree, 0)
-  |> (&"The weight of the one program with wrong weight needs to be #{&1}.").()
+  |> (&"Part 2: The weight of the one program with wrong weight needs to be #{&1}.").()
   |> IO.puts

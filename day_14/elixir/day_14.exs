@@ -131,7 +131,7 @@ hashlist =
 
 hashlist
   |> Day14.used_blocks
-  |> (&"The are #{&1} used blocks.").()
+  |> (&"Part 1: The are #{&1} used blocks.").()
   |> IO.puts
 
 # hashlist
@@ -142,5 +142,5 @@ hashlist
 hashlist
   |> Day14.grid
   |> Day14.regions
-  |> (&"The are #{&1} regions.").()
+  |> (&"Part 2: The are #{&1} regions.").()
   |> IO.puts

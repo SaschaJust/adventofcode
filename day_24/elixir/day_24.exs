@@ -35,10 +35,10 @@ blocks = input
 
 blocks
   |> Day24.perform(&Day24.part1_reducer/1)
-  |> (&"The strength of the strongest bridge is #{&1 |> elem(0)}.").()
+  |> (&"Part 1: The strength of the strongest bridge is #{&1 |> elem(0)}.").()
   |> IO.puts
 
 blocks
   |> Day24.perform(&Day24.part2_reducer/1)
-  |> (&"The strength of the longest bridge is #{&1 |> elem(0)}.").()
+  |> (&"Part 2: The strength of the longest bridge is #{&1 |> elem(0)}.").()
   |> IO.puts
