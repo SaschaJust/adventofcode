@@ -1,2 +1,4 @@
 language: elixir
 elixir: '1.5.2'
+notifications:
+  slack: mozkito:0ts3XqEgmf74AYq947S3EDvn
